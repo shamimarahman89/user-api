@@ -73,7 +73,7 @@ app.get("/api/user/favourites", passport.authenticate('jwt', { session: false })
 });
 
 app.put("/api/user/favourites/:id", passport.authenticate('jwt', { session: false }) ,(req,res)=>{
-    userService.addFavourite(req.user._id,req.body).then((data)=>{
+    userService.addFavourite(req.user._id,req.params['id']).then((data)=>{
         res.json(data);
     }).catch(()=>{
         res.status(500).json({error: err});
@@ -81,7 +81,7 @@ app.put("/api/user/favourites/:id", passport.authenticate('jwt', { session: fals
 });
 
 app.delete("/api/user/favourites/:id", passport.authenticate('jwt', { session: false }) ,(req,res)=>{
-    userService.removeFavourite(req.user._id,req.body).then((data)=>{
+    userService.removeFavourite(req.user._id,req.params['id']).then((data)=>{
         res.json(data);
     }).catch(()=>{
         res.status(500).json({error: err});
